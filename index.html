@@ -12,14 +12,16 @@
 
 <body>
     <div id="app">
-        <div class="header">
-            <h1>Question</h1>
-            <input type="number" v-model.number="index">
+        <div class="landing">
+            <div class="header">
+                <h1>Question</h1>
+                <input type="number" v-model.number="index">
+            </div>
+            <button v-for="letter in letters" v-on:click="add(letter)"
+                v-bind:class="{ highlighted : shouldBeHighlighted(letter)}">{{letter}}</button>
+            <button v-on:click="suivant">Suivant</button>
+            <button v-on:click="precedent">Précédent</button>
         </div>
-        <button v-for="letter in letters" v-on:click="add(letter)"
-            v-bind:class="{ highlighted : shouldBeHighlighted(letter)}">{{letter}}</button>
-        <button v-on:click="suivant">Suivant</button>
-        <button v-on:click="precedent">Précédent</button>
         <h3 v-for="answer in answers" v-bind:key="answer.index">{{ answer.index }} - {{ answer.letter }}</h3>
         <button id="reset" v-on:click="reset">RESET !</button>
     </div>
