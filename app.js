@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#app',
     data: {
         letters: ["a", "b", "c", "d"],
+        loadingProgress: 0,
         index: parseInt(localStorage.getItem('index')) || 1,
         answers: JSON.parse(localStorage.getItem('answers')) || []
         /* 
@@ -19,11 +20,13 @@ var app = new Vue({
         suivant() {
             this.index += 1
             this.save()
+            this.updateProgressBar()
         },
         precedent() {
             if (this.index > 1)
                 this.index -= 1
             this.save()
+            this.updateProgressBar()
         },
         add(letter) {
             let newAnswer = { index: this.index, letter: letter }
@@ -40,6 +43,7 @@ var app = new Vue({
             }
             this.index += 1
             this.save()
+            this.updateProgressBar()
         },
         reset() {
             this.answers = []
@@ -58,6 +62,9 @@ var app = new Vue({
                 }
             }
             return false
+        },
+        updateProgressBar() {
+            this.loadingProgress = this.index / 2
         },
         save() {
             localStorage.setItem("answers", JSON.stringify(this.answers))

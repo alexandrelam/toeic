@@ -50,3 +50,11 @@ input {
 .highlighted {
   background-color: violet;
 }
+
+.loading-bar {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  background-color: salmon;
+  height: 4px;
+}
