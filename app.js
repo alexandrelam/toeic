@@ -50,6 +50,15 @@ var app = new Vue({
             // .find retourne undefined si on a jamais répondu à la question
             return this.answers.find(ans => ans.index === this.index) !== undefined
         },
+        shouldBeHighlighted(letter) {
+            if (this.isAlreadyAnswered()) {
+                let existingAnswer = this.answers.find(ans => ans.index === this.index)
+                if (existingAnswer.letter === letter) {
+                    return true
+                }
+            }
+            return false
+        },
         save() {
             localStorage.setItem("answers", JSON.stringify(this.answers))
             localStorage.setItem("index", this.index)
